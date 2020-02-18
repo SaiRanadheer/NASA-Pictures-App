@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NASA Pictures App</string>
+    <string name="images_hdr">IMAGES</string>
+    <string name="noImagesText">It appears there are no images available yet. Please add some images!</string>
 </resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        android:orientation="vertical"
+        tools:context="com.sairanadheer.nasapicturesapp.ui.ImagesGridFragment">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen25dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/images_hdr"
+                android:textColor="@color/headerColor"
+                android:textSize="@dimen/dimen16sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/noImagesMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dimen25dp"
+            android:layout_marginTop="@dimen/dimen15dp"
+            android:layout_marginEnd="@dimen/dimen25dp"
+            android:layout_marginBottom="@dimen/dimen15dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/noImagesText"
+            android:textColor="@color/headerColor"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imagesFeedView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen20dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
