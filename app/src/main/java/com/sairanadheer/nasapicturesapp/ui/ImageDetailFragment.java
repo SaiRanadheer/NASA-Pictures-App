@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.databinding.FragmentImageDetailBinding;
-import com.sairanadheer.nasapicturesapp.ui.adapters.ImageDetailPagerAdapter;
+import com.sairanadheer.nasapicturesapp.adapters.ImageDetailPagerAdapter;
 
 import java.util.List;
 

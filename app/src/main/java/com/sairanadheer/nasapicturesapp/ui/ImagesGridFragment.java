@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.databinding.FragmentImagesGridBinding;
-import com.sairanadheer.nasapicturesapp.ui.adapters.ImagesGridAdapter;
+import com.sairanadheer.nasapicturesapp.adapters.ImagesGridAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

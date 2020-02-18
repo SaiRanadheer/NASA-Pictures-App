@@ -1,4 +1,4 @@
-package com.sairanadheer.nasapicturesapp.ui.adapters;
+package com.sairanadheer.nasapicturesapp.adapters;
 
 import android.content.Context;
 import android.text.TextUtils;
