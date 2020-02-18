@@ -1,6 +1,8 @@
 package com.sairanadheer.nasapicturesapp.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +18,17 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.sairanadheer.nasapicturesapp.R;
 
-import java.util.List;
+import org.json.JSONArray;
 
 public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPagerAdapter.ImageDetailViewHolder> {
 
     private Context mContext;
-    private List<String> imageURLs;
+    private JSONArray imagesData;
 
-    public ImageDetailPagerAdapter(Context mContext, List<String> imageURLs) {
+
+    public ImageDetailPagerAdapter(Context mContext, JSONArray imagesData) {
         this.mContext = mContext;
-        this.imageURLs = imageURLs;
+        this.imagesData = imagesData;
     }
 
     @NonNull
@@ -37,25 +40,29 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
 
     @Override
     public void onBindViewHolder(@NonNull ImageDetailViewHolder holder, int position) {
-        final String imageURL = imageURLs.get(position);
-        if (!TextUtils.isEmpty(imageURL)) {
-            RequestOptions defaultOptions = new RequestOptions();
-            defaultOptions.transform(new RoundedCorners(1));
-            defaultOptions.error(R.color.colorWhite);
+        try {
+            final String imageURL = imagesData.getJSONObject(position).getString("url");
+            if (!TextUtils.isEmpty(imageURL)) {
+                RequestOptions defaultOptions = new RequestOptions();
+                defaultOptions.transform(new RoundedCorners(1));
+                defaultOptions.error(R.color.colorWhite);
 
-            RequestOptions cachingOptions = new RequestOptions();
-            cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+                RequestOptions cachingOptions = new RequestOptions();
+                cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
 
-            Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
-                    .load(imageURL)
-                    .apply(cachingOptions)
-                    .into(holder.imageDetail);
+                Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
+                        .load(imageURL)
+                        .apply(cachingOptions)
+                        .into(holder.imageDetail);
+            }
+        } catch (Exception e) {
+            showAlertDialog();
         }
     }
 
     @Override
     public int getItemCount() {
-        return imageURLs == null ? 0 : imageURLs.size();
+        return imagesData == null ? 0 : imagesData.length();
     }
 
     public class ImageDetailViewHolder extends RecyclerView.ViewHolder {
@@ -64,5 +71,19 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
             super(itemView);
             imageDetail = itemView.findViewById(R.id.imageDetail);
         }
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("ERROR");
+        builder.setMessage("Something went wrong.Please try again later");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        builder.show();
     }
 }

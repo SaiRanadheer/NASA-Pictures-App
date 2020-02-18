@@ -1,6 +1,8 @@
 package com.sairanadheer.nasapicturesapp.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.ui.ImageDetailFragment;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.ImagesGridViewHolder> {
 
@@ -29,11 +32,11 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
 
 
     private Context mContext;
-    private List<String> imageURLs;
+    private JSONArray imagesData;
 
-    public ImagesGridAdapter(Context mContext, List<String> imageURLs) {
+    public ImagesGridAdapter(Context mContext, JSONArray imagesData) {
         this.mContext = mContext;
-        this.imageURLs = imageURLs;
+        this.imagesData = imagesData;
     }
 
     @NonNull
@@ -58,7 +61,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         holder.gridImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imageURLs, position);
+                ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imagesData, position);
                 imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
                 imageDetailFragment.show(((FragmentActivity)mContext).getSupportFragmentManager(), "ImagesGridFragment");
             }
@@ -67,31 +70,40 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
     }
 
     private void populateItemRows(ImagesGridViewHolder holder, int position) {
-        final String imageURL = imageURLs.get(position);
-        if (!TextUtils.isEmpty(imageURL)) {
-            RequestOptions defaultOptions = new RequestOptions();
-            defaultOptions.transform(new RoundedCorners(1));
-            defaultOptions.error(R.color.colorWhite);
+        try {
+            final String imageURL = imagesData.getJSONObject(position).getString("url");
+            if (!TextUtils.isEmpty(imageURL)) {
+                RequestOptions defaultOptions = new RequestOptions();
+                defaultOptions.transform(new RoundedCorners(1));
+                defaultOptions.error(R.color.colorWhite);
 
-            RequestOptions cachingOptions = new RequestOptions();
-            cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+                RequestOptions cachingOptions = new RequestOptions();
+                cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
 
-            Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
-                    .load(imageURL)
-                    .apply(cachingOptions)
-                    .thumbnail(0.1f)
-                    .into(holder.gridImage);
+                Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
+                        .load(imageURL)
+                        .apply(cachingOptions)
+                        .thumbnail(0.1f)
+                        .into(holder.gridImage);
+            }
+        } catch (JSONException e) {
+            showAlertDialog();
         }
     }
 
     @Override
     public int getItemCount() {
-        return imageURLs == null ? 0 : imageURLs.size();
+        return imagesData == null ? 0 : imagesData.length();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return imageURLs.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_IMAGE;
+        try {
+            return imagesData.getJSONObject(position).getString("url") == null ? VIEW_TYPE_LOADING : VIEW_TYPE_IMAGE;
+        } catch (Exception e) {
+            showAlertDialog();
+        }
+        return 0;
     }
 
     class ImagesGridViewHolder extends RecyclerView.ViewHolder{
@@ -111,5 +123,19 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
             super(itemView);
             progressBar = itemView.findViewById(R.id.progressBar);
         }
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("ERROR");
+        builder.setMessage("Something went wrong.Please try again later");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        builder.show();
     }
 }

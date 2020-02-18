@@ -14,22 +14,24 @@ import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.databinding.FragmentImageDetailBinding;
 import com.sairanadheer.nasapicturesapp.adapters.ImageDetailPagerAdapter;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 public class ImageDetailFragment extends DialogFragment {
 
     private FragmentImageDetailBinding mImageDetailBinding;
     private ViewPager2 imagePager;
-    private List<String> imageURLs;
+    private JSONArray imagesData;
     private int imagePosition;
 
-    public ImageDetailFragment(List<String> imageURLs, int imagePosition) {
-        this.imageURLs = imageURLs;
+    public ImageDetailFragment(JSONArray imagesData, int imagePosition) {
+        this.imagesData = imagesData;
         this.imagePosition = imagePosition;
     }
 
-    public static ImageDetailFragment newInstance(List<String> imageURLs, int imagePosition){
-        return new ImageDetailFragment(imageURLs, imagePosition);
+    public static ImageDetailFragment newInstance(JSONArray imagesData, int imagePosition){
+        return new ImageDetailFragment(imagesData, imagePosition);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ImageDetailFragment extends DialogFragment {
     }
 
     private void bindData() {
-        ImageDetailPagerAdapter imageDetailAdapter = new ImageDetailPagerAdapter(getContext(), imageURLs);
+        ImageDetailPagerAdapter imageDetailAdapter = new ImageDetailPagerAdapter(getContext(), imagesData);
         imagePager.setAdapter(imageDetailAdapter);
         imagePager.setCurrentItem(imagePosition, false);
     }

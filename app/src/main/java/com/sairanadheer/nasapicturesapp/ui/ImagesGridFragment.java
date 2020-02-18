@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.databinding.FragmentImagesGridBinding;
 import com.sairanadheer.nasapicturesapp.adapters.ImagesGridAdapter;
+import com.sairanadheer.nasapicturesapp.vo.Data;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,20 +63,15 @@ public class ImagesGridFragment extends DialogFragment {
             stream.close();
 
             json = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray jsonArray = new JSONArray(json);
-
-            List<String> imageURLs = new ArrayList<>();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject object = jsonArray.getJSONObject(i);
-                imageURLs.add(object.getString("url"));
-            }
-            if (imageURLs.size() == 0) {
+            JSONArray imagesData = new JSONArray(json);
+            
+            if (imagesData.length() == 0) {
                 noImagesMessage.setVisibility(View.VISIBLE);
                 imagesFeedView.setVisibility(View.GONE);
             } else {
                 noImagesMessage.setVisibility(View.GONE);
                 imagesFeedView.setVisibility(View.VISIBLE);
-                ImagesGridAdapter imagesGridAdapter = new ImagesGridAdapter(getContext(), imageURLs);
+                ImagesGridAdapter imagesGridAdapter = new ImagesGridAdapter(getContext(), imagesData);
                 imagesFeedView.setAdapter(imagesGridAdapter);
             }
 
