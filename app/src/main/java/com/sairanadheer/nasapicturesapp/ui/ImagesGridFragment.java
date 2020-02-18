@@ -29,7 +29,7 @@ import java.util.Objects;
 
 public class ImagesGridFragment extends DialogFragment {
 
-    private FragmentImagesGridBinding imagesGridBinding;
+    private FragmentImagesGridBinding mImagesGridBinding;
     private RecyclerView imagesFeedView;
     private AppCompatTextView noImagesMessage;
 
@@ -39,17 +39,17 @@ public class ImagesGridFragment extends DialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        imagesGridBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_images_grid, container, false);
+        mImagesGridBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_images_grid, container, false);
         configureViewElements();
         retrieveImages();
-        return imagesGridBinding.getRoot();
+        return mImagesGridBinding.getRoot();
     }
 
     private void configureViewElements() {
-        imagesFeedView = imagesGridBinding.imagesFeedView;
+        imagesFeedView = mImagesGridBinding.imagesFeedView;
         imagesFeedView.setHasFixedSize(true);
         imagesFeedView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        noImagesMessage = imagesGridBinding.noImagesMessage;
+        noImagesMessage = mImagesGridBinding.noImagesMessage;
     }
 
     private void retrieveImages() {

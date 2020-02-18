@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.sairanadheer.nasapicturesapp.R;
+import com.sairanadheer.nasapicturesapp.ui.ImageDetailFragment;
 
 import java.util.List;
 
@@ -25,11 +28,11 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
     private final int VIEW_TYPE_LOADING = 1;
 
 
-    private Context context;
+    private Context mContext;
     private List<String> imageURLs;
 
-    public ImagesGridAdapter(Context context, List<String> imageURLs) {
-        this.context = context;
+    public ImagesGridAdapter(Context mContext, List<String> imageURLs) {
+        this.mContext = mContext;
         this.imageURLs = imageURLs;
     }
 
@@ -48,9 +51,18 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImagesGridViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ImagesGridViewHolder holder, final int position) {
 
         populateItemRows(holder, position);
+
+        holder.gridImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imageURLs, position);
+                imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
+                imageDetailFragment.show(((FragmentActivity)mContext).getSupportFragmentManager(), "ImagesGridFragment");
+            }
+        });
 
     }
 
@@ -64,8 +76,8 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
             RequestOptions cachingOptions = new RequestOptions();
             cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
 
-            Glide.with(context).applyDefaultRequestOptions(defaultOptions)
-                    .load(imageURLs.get(position))
+            Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
+                    .load(imageURL)
                     .apply(cachingOptions)
                     .thumbnail(0.1f)
                     .into(holder.gridImage);
@@ -82,20 +94,12 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         return imageURLs.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_IMAGE;
     }
 
-    class ImagesGridViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ImagesGridViewHolder extends RecyclerView.ViewHolder{
         private AppCompatImageView gridImage;
 
         ImagesGridViewHolder(@NonNull View itemView) {
             super(itemView);
             gridImage = itemView.findViewById(R.id.gridImage);
-            gridImage.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (view.getId() == gridImage.getId()) {
-
-            }
         }
     }
 
