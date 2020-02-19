@@ -35,7 +35,7 @@
             android:layout_marginEnd="@dimen/dimen25dp"
             android:layout_marginBottom="@dimen/dimen15dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="@string/noImagesText"
+            android:text="@string/no_images_text"
             android:textColor="@color/headerColor"
             android:visibility="gone" />
 

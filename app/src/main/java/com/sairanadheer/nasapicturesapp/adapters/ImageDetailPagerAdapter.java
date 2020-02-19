@@ -3,6 +3,7 @@ package com.sairanadheer.nasapicturesapp.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,24 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
                         .into(holder.imageDetail);
 
                 holder.imageTitle.setText(imageData.getString("title"));
+                String imageDescription = imageData.getString("explanation");
+                if (imageDescription.length() > 100) {
+                    holder.imageDesc.setText(imageDescription.substring(0, 97).concat("..."));
+                    holder.expandText.setText("Read More");
+                } else {
+                    holder.imageDesc.setText(imageDescription);
+                    holder.expandText.setVisibility(View.GONE);
+                }
+
+                holder.expandText.setOnClickListener(view -> {
+                    if(holder.expandText.getText().equals("Read More")) {
+                        holder.imageDesc.setText(imageDescription);
+                        holder.expandText.setText("Read Less");
+                    } else {
+                        holder.imageDesc.setText(imageDescription.substring(0,97).concat("..."));
+                        holder.expandText.setText("Read More");
+                    }
+                });
             }
         } catch (Exception e) {
             showAlertDialog();
@@ -78,18 +97,23 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
         private AppCompatImageView imageDetail;
         private AppCompatImageView backBtn;
         private AppCompatTextView imageTitle;
+        private AppCompatTextView imageDesc;
+        private AppCompatTextView expandText;
 
         public ImageDetailViewHolder(@NonNull View itemView) {
             super(itemView);
             imageDetail = itemView.findViewById(R.id.imageDetail);
             backBtn = itemView.findViewById(R.id.backBtn);
             imageTitle = itemView.findViewById(R.id.imageTitle);
+            imageDesc = itemView.findViewById(R.id.imageDesc);
+            expandText = itemView.findViewById(R.id.expandText);
+            expandText.setPaintFlags(expandText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             backBtn.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if(view.getId() == backBtn.getId()){
+            if (view.getId() == backBtn.getId()) {
                 imageDetailFragmentDialog.dismiss();
             }
         }

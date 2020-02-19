@@ -17,4 +17,8 @@
     <dimen name="dimen4dp">4dp</dimen>
     <dimen name="dimen7dp">7dp</dimen>
     <dimen name="dimen225dp">225dp</dimen>
+    <dimen name="dimen14sp">14sp</dimen>
+    <dimen name="dimen8sp">8sp</dimen>
+    <dimen name="dimen12sp">12sp</dimen>
+    <dimen name="dimen10sp">10sp</dimen>
 </resources>

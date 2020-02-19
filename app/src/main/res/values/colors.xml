@@ -6,4 +6,5 @@
     <color name="appBackgroundColor">#EAF0F7</color>
     <color name="headerColor">#413F4B</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="linkColor">#1B76D3</color>
 </resources>
