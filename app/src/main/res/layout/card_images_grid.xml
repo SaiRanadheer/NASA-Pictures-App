@@ -19,6 +19,6 @@
         android:adjustViewBounds="true"
         android:background="#F6FEFF"
         android:maxHeight="@dimen/dimen450dp"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:visibility="visible" />
 </androidx.cardview.widget.CardView>
