@@ -17,15 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.databinding.FragmentImagesGridBinding;
 import com.sairanadheer.nasapicturesapp.adapters.ImagesGridAdapter;
-import com.sairanadheer.nasapicturesapp.vo.Data;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class ImagesGridFragment extends DialogFragment {
@@ -64,7 +59,7 @@ public class ImagesGridFragment extends DialogFragment {
 
             json = new String(buffer, StandardCharsets.UTF_8);
             JSONArray imagesData = new JSONArray(json);
-            
+
             if (imagesData.length() == 0) {
                 noImagesMessage.setVisibility(View.VISIBLE);
                 imagesFeedView.setVisibility(View.GONE);

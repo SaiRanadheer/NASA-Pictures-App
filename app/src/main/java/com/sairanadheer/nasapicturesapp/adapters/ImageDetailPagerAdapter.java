@@ -10,25 +10,30 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.sairanadheer.nasapicturesapp.R;
+import com.sairanadheer.nasapicturesapp.ui.ImageDetailFragment;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPagerAdapter.ImageDetailViewHolder> {
 
     private Context mContext;
     private JSONArray imagesData;
+    private ImageDetailFragment imageDetailFragmentDialog;
 
-
-    public ImageDetailPagerAdapter(Context mContext, JSONArray imagesData) {
+    public ImageDetailPagerAdapter(Context mContext, JSONArray imagesData, ImageDetailFragment imageDetailFragmentDialog) {
         this.mContext = mContext;
         this.imagesData = imagesData;
+        this.imageDetailFragmentDialog = imageDetailFragmentDialog;
     }
 
     @NonNull
@@ -41,19 +46,23 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
     @Override
     public void onBindViewHolder(@NonNull ImageDetailViewHolder holder, int position) {
         try {
-            final String imageURL = imagesData.getJSONObject(position).getString("url");
+            JSONObject imageData = imagesData.getJSONObject(position);
+            final String imageURL = imageData.getString("url");
             if (!TextUtils.isEmpty(imageURL)) {
-                RequestOptions defaultOptions = new RequestOptions();
-                defaultOptions.transform(new RoundedCorners(1));
-                defaultOptions.error(R.color.colorWhite);
+                RequestOptions defaultOptions = new RequestOptions()
+                        .transform(new RoundedCorners(1))
+                        .error(R.color.colorWhite);
 
-                RequestOptions cachingOptions = new RequestOptions();
-                cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+                RequestOptions cachingOptions = new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL);
 
                 Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
                         .load(imageURL)
                         .apply(cachingOptions)
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(holder.imageDetail);
+
+                holder.imageTitle.setText(imageData.getString("title"));
             }
         } catch (Exception e) {
             showAlertDialog();
@@ -65,11 +74,24 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
         return imagesData == null ? 0 : imagesData.length();
     }
 
-    public class ImageDetailViewHolder extends RecyclerView.ViewHolder {
+    public class ImageDetailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private AppCompatImageView imageDetail;
+        private AppCompatImageView backBtn;
+        private AppCompatTextView imageTitle;
+
         public ImageDetailViewHolder(@NonNull View itemView) {
             super(itemView);
             imageDetail = itemView.findViewById(R.id.imageDetail);
+            backBtn = itemView.findViewById(R.id.backBtn);
+            imageTitle = itemView.findViewById(R.id.imageTitle);
+            backBtn.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId() == backBtn.getId()){
+                imageDetailFragmentDialog.dismiss();
+            }
         }
     }
 

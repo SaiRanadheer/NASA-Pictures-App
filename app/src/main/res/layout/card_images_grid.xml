@@ -6,15 +6,16 @@
     android:layout_marginStart="@dimen/dimen5dp"
     android:layout_marginTop="@dimen/dimen14dp"
     android:layout_marginEnd="@dimen/dimen5dp"
-    android:background="@android:color/transparent"
+    android:background="#F6FEFF"
     app:cardCornerRadius="@dimen/dimen8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gridImage"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen150dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen250dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
+        android:background="#F6FEFF"
         android:maxHeight="@dimen/dimen450dp"
         android:scaleType="fitCenter"
         android:visibility="visible" />

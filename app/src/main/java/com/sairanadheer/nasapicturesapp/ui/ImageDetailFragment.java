@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.viewpager2.widget.ViewPager2;
@@ -43,7 +45,7 @@ public class ImageDetailFragment extends DialogFragment {
     }
 
     private void bindData() {
-        ImageDetailPagerAdapter imageDetailAdapter = new ImageDetailPagerAdapter(getContext(), imagesData);
+        ImageDetailPagerAdapter imageDetailAdapter = new ImageDetailPagerAdapter(getContext(), imagesData, ImageDetailFragment.this);
         imagePager.setAdapter(imageDetailAdapter);
         imagePager.setCurrentItem(imagePosition, false);
     }

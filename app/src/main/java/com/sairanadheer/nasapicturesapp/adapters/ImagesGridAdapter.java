@@ -63,7 +63,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
             public void onClick(View view) {
                 ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imagesData, position);
                 imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
-                imageDetailFragment.show(((FragmentActivity)mContext).getSupportFragmentManager(), "ImagesGridFragment");
+                imageDetailFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "ImagesGridFragment");
             }
         });
 
@@ -73,12 +73,12 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         try {
             final String imageURL = imagesData.getJSONObject(position).getString("url");
             if (!TextUtils.isEmpty(imageURL)) {
-                RequestOptions defaultOptions = new RequestOptions();
-                defaultOptions.transform(new RoundedCorners(1));
-                defaultOptions.error(R.color.colorWhite);
+                RequestOptions defaultOptions = new RequestOptions()
+                        .transform(new RoundedCorners(1))
+                        .error(R.color.colorWhite);
 
-                RequestOptions cachingOptions = new RequestOptions();
-                cachingOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+                RequestOptions cachingOptions = new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL);
 
                 Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
                         .load(imageURL)
@@ -106,7 +106,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         return 0;
     }
 
-    class ImagesGridViewHolder extends RecyclerView.ViewHolder{
+    class ImagesGridViewHolder extends RecyclerView.ViewHolder {
         private AppCompatImageView gridImage;
 
         ImagesGridViewHolder(@NonNull View itemView) {
