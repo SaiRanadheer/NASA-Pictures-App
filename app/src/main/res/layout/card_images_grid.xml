@@ -8,7 +8,7 @@
     android:layout_marginEnd="@dimen/dimen5dp"
     android:layout_marginBottom="@dimen/dimen7dp"
     app:cardBackgroundColor="#F6FEFF"
-    app:cardCornerRadius="@dimen/dimen8dp"
+    app:cardCornerRadius="@dimen/dimen25dp"
     app:cardElevation="@dimen/dimen4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
