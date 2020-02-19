@@ -43,7 +43,7 @@
             android:id="@+id/imagesFeedView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/dimen20dp" />
+            android:layout_marginBottom="@dimen/dimen25dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

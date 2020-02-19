@@ -19,8 +19,13 @@ import com.sairanadheer.nasapicturesapp.databinding.FragmentImagesGridBinding;
 import com.sairanadheer.nasapicturesapp.adapters.ImagesGridAdapter;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 
 public class ImagesGridFragment extends DialogFragment {
@@ -60,13 +65,30 @@ public class ImagesGridFragment extends DialogFragment {
             json = new String(buffer, StandardCharsets.UTF_8);
             JSONArray imagesData = new JSONArray(json);
 
+            JSONObject[] imageDataObjects = new JSONObject[imagesData.length()];
+
+            for(int i = 0; i < imagesData.length(); i++){
+                imageDataObjects[i] = imagesData.getJSONObject(i);
+            }
+
+            Arrays.sort(imageDataObjects, Collections.reverseOrder( (JSONObject object1, JSONObject object2) -> {
+                try {
+                    return (object1.getString("date").compareTo(object2.getString("date")));
+                } catch (JSONException e) {
+                    showAlertDialog();
+                }
+                return 0;
+            }));
+
+            JSONArray sortedImagesData = new JSONArray(imageDataObjects);
+
             if (imagesData.length() == 0) {
                 noImagesMessage.setVisibility(View.VISIBLE);
                 imagesFeedView.setVisibility(View.GONE);
             } else {
                 noImagesMessage.setVisibility(View.GONE);
                 imagesFeedView.setVisibility(View.VISIBLE);
-                ImagesGridAdapter imagesGridAdapter = new ImagesGridAdapter(getContext(), imagesData);
+                ImagesGridAdapter imagesGridAdapter = new ImagesGridAdapter(getContext(), sortedImagesData);
                 imagesFeedView.setAdapter(imagesGridAdapter);
             }
 

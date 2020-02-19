@@ -4,15 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/dimen5dp"
-    android:layout_marginTop="@dimen/dimen14dp"
+    android:layout_marginTop="@dimen/dimen7dp"
     android:layout_marginEnd="@dimen/dimen5dp"
-    android:background="#F6FEFF"
-    app:cardCornerRadius="@dimen/dimen8dp">
+    android:layout_marginBottom="@dimen/dimen7dp"
+    app:cardBackgroundColor="#F6FEFF"
+    app:cardCornerRadius="@dimen/dimen8dp"
+    app:cardElevation="@dimen/dimen4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gridImage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen250dp"
+        android:layout_height="@dimen/dimen225dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:background="#F6FEFF"
