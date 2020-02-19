@@ -1,6 +1,8 @@
 package com.sairanadheer.nasapicturesapp.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
@@ -46,6 +49,18 @@ public class ImagesGridFragment extends DialogFragment {
         return mImagesGridBinding.getRoot();
     }
 
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        return new Dialog(Objects.requireNonNull(getActivity()), getTheme()) {
+            @Override
+            public void onBackPressed() {
+                ((Activity) getContext()).finishAffinity();
+            }
+
+        };
+    }
+
     private void configureViewElements() {
         imagesFeedView = mImagesGridBinding.imagesFeedView;
         imagesFeedView.setHasFixedSize(true);
@@ -67,11 +82,11 @@ public class ImagesGridFragment extends DialogFragment {
 
             JSONObject[] imageDataObjects = new JSONObject[imagesData.length()];
 
-            for(int i = 0; i < imagesData.length(); i++){
+            for (int i = 0; i < imagesData.length(); i++) {
                 imageDataObjects[i] = imagesData.getJSONObject(i);
             }
 
-            Arrays.sort(imageDataObjects, Collections.reverseOrder( (JSONObject object1, JSONObject object2) -> {
+            Arrays.sort(imageDataObjects, Collections.reverseOrder((JSONObject object1, JSONObject object2) -> {
                 try {
                     return (object1.getString("date").compareTo(object2.getString("date")));
                 } catch (JSONException e) {

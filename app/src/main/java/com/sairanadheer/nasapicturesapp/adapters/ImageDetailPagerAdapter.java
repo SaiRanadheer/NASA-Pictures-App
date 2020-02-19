@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -60,6 +59,7 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
                 Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
                         .load(imageURL)
                         .apply(cachingOptions)
+                        .placeholder(mContext.getDrawable(R.drawable.loading_animation))
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(holder.imageDetail);
 

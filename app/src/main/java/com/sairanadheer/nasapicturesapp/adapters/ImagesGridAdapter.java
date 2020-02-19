@@ -83,6 +83,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
                 Glide.with(mContext).applyDefaultRequestOptions(defaultOptions)
                         .load(imageURL)
                         .apply(cachingOptions)
+                        .placeholder(mContext.getDrawable(R.drawable.loading_animation))
                         .thumbnail(0.1f)
                         .into(holder.gridImage);
             }
