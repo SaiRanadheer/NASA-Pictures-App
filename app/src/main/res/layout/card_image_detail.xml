@@ -5,92 +5,97 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/appBackgroundColor">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/headerLayout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen15dp"
-            android:layout_marginTop="@dimen/dimen25dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@color/appBackgroundColor">
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/headerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/backBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/arrow_back_black_vector" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/imageTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/dimen15dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="IMAGE heading"
-                    android:textAllCaps="true"
-                    android:textColor="@color/headerColor"
-                    android:textSize="@dimen/dimen14sp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen15dp"
+                android:layout_marginStart="@dimen/dimen15dp"
+                android:layout_marginTop="@dimen/dimen25dp"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dimen7dp"
-                    android:text="@string/description_txt"
-                    android:textColor="@color/headerColor"
-                    android:textSize="@dimen/dimen14sp"
-                    android:fontFamily="@font/roboto_medium"/>
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/imageDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text=""
-                    android:textColor="@color/headerColor"
-                    android:textSize="@dimen/dimen12sp" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/backBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/arrow_back_black_vector" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/expandText"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/imageTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen15dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="IMAGE heading"
+                        android:textAllCaps="true"
+                        android:textColor="@color/headerColor"
+                        android:textSize="@dimen/dimen14sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen15dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="end"
-                    android:text="Read More"
-                    android:textColor="@color/linkColor"
-                    android:textSize="@dimen/dimen10sp" />
+                    android:layout_marginBottom="@dimen/dimen15dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen7dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/description_txt"
+                        android:textColor="@color/headerColor"
+                        android:textSize="@dimen/dimen14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/imageDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text=""
+                        android:textColor="@color/headerColor"
+                        android:textSize="@dimen/dimen12sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/expandText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dimen15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="end"
+                        android:text="Read More"
+                        android:textColor="@color/linkColor"
+                        android:textSize="@dimen/dimen10sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/headerLayout">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageDetail"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/appBackgroundColor" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_below="@id/headerLayout">
 
-    </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/appBackgroundColor" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.cardview.widget.CardView>
