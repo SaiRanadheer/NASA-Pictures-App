@@ -21,4 +21,5 @@
     <dimen name="dimen8sp">8sp</dimen>
     <dimen name="dimen12sp">12sp</dimen>
     <dimen name="dimen10sp">10sp</dimen>
+    <dimen name="dimen110dp">110dp</dimen>
 </resources>

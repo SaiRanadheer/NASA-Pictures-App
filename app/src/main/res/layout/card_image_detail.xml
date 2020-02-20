@@ -24,31 +24,51 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/backBtn"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/arrow_back_black_vector" />
+                        android:layout_weight="0.1">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/imageTitle"
-                        android:layout_width="wrap_content"
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/backBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/arrow_back_black_vector" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/imageTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/dimen15dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="IMAGE heading"
+                            android:textAllCaps="true"
+                            android:textColor="@color/headerColor"
+                            android:textSize="@dimen/dimen14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/dimen15dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="IMAGE heading"
-                        android:textAllCaps="true"
-                        android:textColor="@color/headerColor"
-                        android:textSize="@dimen/dimen14sp" />
+                        android:layout_gravity="center"
+                        android:layout_weight="0.9">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/infoIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/info_icon" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen15dp"
                     android:layout_marginBottom="@dimen/dimen15dp"
                     android:orientation="vertical">
 
@@ -95,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen10dp"
                     android:layout_marginEnd="@dimen/dimen10dp"
-                    android:adjustViewBounds="true"/>
+                    android:adjustViewBounds="true" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </RelativeLayout>

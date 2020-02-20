@@ -7,4 +7,5 @@
     <color name="headerColor">#413F4B</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="linkColor">#1B76D3</color>
+    <color name="lightGray">#F5F5F5</color>
 </resources>

@@ -1,16 +1,22 @@
 package com.sairanadheer.nasapicturesapp.adapters;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +28,7 @@ import com.sairanadheer.nasapicturesapp.R;
 import com.sairanadheer.nasapicturesapp.ui.ImageDetailFragment;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPagerAdapter.ImageDetailViewHolder> {
@@ -82,6 +89,41 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
                         holder.expandText.setText("Read More");
                     }
                 });
+
+                holder.infoIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        try {
+                            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View miscDetailsPopUp = inflater.inflate(R.layout.image_misc_details, null);
+                            AppCompatTextView copyrightValue = miscDetailsPopUp.findViewById(R.id.copyrightValue);
+                            AppCompatTextView dateValue = miscDetailsPopUp.findViewById(R.id.dateValue);
+                            AppCompatTextView serviceVersionValue = miscDetailsPopUp.findViewById(R.id.serviceVersionValue);
+
+                            if(imageData.has("copyright")) {
+                                copyrightValue.setText(imageData.getString("copyright"));
+                            } else{
+                                copyrightValue.setText("NA");
+                            }
+                            dateValue.setText(imageData.getString("date"));
+                            serviceVersionValue.setText(imageData.getString("service_version"));
+
+                            LinearLayoutCompat.LayoutParams params = new LinearLayoutCompat.LayoutParams(
+                                    mContext.getResources().getDisplayMetrics().widthPixels-50,
+                                    LinearLayoutCompat.LayoutParams.MATCH_PARENT);
+                            params.setMarginStart(25);
+                            params.setMarginEnd(25);
+
+                            Dialog dialog = new Dialog(mContext);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.addContentView(miscDetailsPopUp,params);
+                            dialog.show();
+                        } catch (Exception e) {
+                            showAlertDialog();
+                        }
+                    }
+                });
             }
         } catch (Exception e) {
             showAlertDialog();
@@ -99,6 +141,7 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
         private AppCompatTextView imageTitle;
         private AppCompatTextView imageDesc;
         private AppCompatTextView expandText;
+        private AppCompatImageView infoIcon;
 
         public ImageDetailViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +150,7 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
             imageTitle = itemView.findViewById(R.id.imageTitle);
             imageDesc = itemView.findViewById(R.id.imageDesc);
             expandText = itemView.findViewById(R.id.expandText);
+            infoIcon = itemView.findViewById(R.id.infoIcon);
             expandText.setPaintFlags(expandText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             backBtn.setOnClickListener(this);
         }
@@ -123,7 +167,7 @@ public class ImageDetailPagerAdapter extends RecyclerView.Adapter<ImageDetailPag
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("ERROR");
         builder.setMessage("Something went wrong.Please try again later");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

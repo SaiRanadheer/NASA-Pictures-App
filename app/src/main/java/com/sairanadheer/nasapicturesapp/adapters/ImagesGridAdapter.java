@@ -130,7 +130,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("ERROR");
         builder.setMessage("Something went wrong.Please try again later");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
