@@ -11,7 +11,7 @@ NASA Pictures App is an image gallery application where all the images present i
 * Compile Android SDK: requires you to compile against API 23 or later.
 
 # Build
-Building Glide with gradle is fairly straight forward:
+Building the application with gradle is fairly straight forward:
 
 ```
 git clone https://github.com/SaiRanadheer/NASA-Pictures-app
@@ -30,7 +30,7 @@ Follow the steps in the [Build](https://github.com/SaiRanadheer/NASA-Pictures-ap
 To open the project in Android Studio:
 Go to File menu or the Welcome Screen
 Click on Open...
-Navigate to Glide's root directory.
+Navigate to application's root directory.
 Select setting.gradle
 Getting Help
 To report a specific problem or feature request, [open a new issue on Github](https://github.com/SaiRanadheer/NASA-Pictures-App/issues/new). For questions, suggestions, or anything else, email [me](mailto:ranadheergupthanunna@gmail.com)
