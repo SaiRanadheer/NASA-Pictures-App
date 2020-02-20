@@ -48,7 +48,7 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         holder.gridImage.setOnClickListener(view -> {
             ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imagesData, position);
             imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
-            imageDetailFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "ImagesGridFragment");
+            imageDetailFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "Image Detail Fragment");
         });
 
     }

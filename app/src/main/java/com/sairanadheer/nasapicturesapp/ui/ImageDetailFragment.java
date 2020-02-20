@@ -23,6 +23,10 @@ public class ImageDetailFragment extends DialogFragment {
     private JSONArray imagesData;
     private int imagePosition;
 
+    public ImageDetailFragment(){
+
+    }
+
     private ImageDetailFragment(JSONArray imagesData, int imagePosition) {
         this.imagesData = imagesData;
         this.imagePosition = imagePosition;
