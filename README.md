@@ -26,13 +26,22 @@ Follow the steps in the [Build](https://github.com/SaiRanadheer/NASA-Pictures-ap
 You may also find precompiled APKs on the [releases page](https://github.com/SaiRanadheer/NASA-Pictures-App/releases).
 
 # Development
-Follow the steps in the [Build](https://github.com/SaiRanadheer/NASA-Pictures-app#build) section to setup the project and then edit the files however you wish. [Android Studio](https://developer.android.com/studio/index.html) cleanly imports both NASA Pictures App’s source and tests and is the recommended way to work with Glide.
+Follow the steps in the [Build](https://github.com/SaiRanadheer/NASA-Pictures-app#build) section to setup the project and then edit the files however you wish. [Android Studio](https://developer.android.com/studio/index.html) cleanly imports both NASA Pictures App’s source and tests and is the recommended way to work with the application.
+
+```
 To open the project in Android Studio:
+
 Go to File menu or the Welcome Screen
+
 Click on Open...
+
 Navigate to application's root directory.
+
 Select setting.gradle
-Getting Help
+```
+
+# Getting Help
+
 To report a specific problem or feature request, [open a new issue on Github](https://github.com/SaiRanadheer/NASA-Pictures-App/issues/new). For questions, suggestions, or anything else, email [me](mailto:ranadheergupthanunna@gmail.com)
 
 # Author
