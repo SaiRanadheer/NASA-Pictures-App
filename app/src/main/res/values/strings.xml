@@ -3,4 +3,7 @@
     <string name="images_hdr">IMAGES</string>
     <string name="no_images_text">It appears there are no images available yet. Please add some images!</string>
     <string name="description_txt">DESCRIPTION</string>
+    <string name="copyright">COPYRIGHT:</string>
+    <string name="image_date">IMAGE DATE:</string>
+    <string name="service_version">SERVICE VERSION:</string>
 </resources>

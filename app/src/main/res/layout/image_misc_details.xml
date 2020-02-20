@@ -24,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="COPYRIGHT: "
+                    android:text="@string/copyright"
                     android:textColor="@color/headerColor" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="IMAGE DATE: "
+                    android:text="@string/image_date"
                     android:textColor="@color/headerColor" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="SERVICE VERSION: "
+                    android:text="@string/service_version"
                     android:textColor="@color/headerColor" />
 
                 <androidx.appcompat.widget.AppCompatTextView
