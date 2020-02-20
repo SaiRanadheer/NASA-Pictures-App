@@ -3,6 +3,8 @@
 NASA Pictures App is an image gallery application where all the images present in the given JSON file are loaded using the open-source library Glide based on the URL provided.
 
 # Screenshots
+
+![](https://github.com/SaiRanadheer/NASA-Pictures-App/blob/media/Images%20Grid%20Screen.jpg) ![](https://github.com/SaiRanadheer/NASA-Pictures-App/blob/media/Image%20Details%20Screen.jpg) ![](https://github.com/SaiRanadheer/NASA-Pictures-App/blob/media/Image%20Details%20Screen%202.jpg)
  
 # Compatibility
 * Minimum Android SDK: requires a minimum API level of 23.
@@ -13,7 +15,7 @@ Building Glide with gradle is fairly straight forward:
 
 ```
 git clone https://github.com/SaiRanadheer/NASA-Pictures-app
-cd glide
+cd NASA-Pictures-app
 ./gradlew jar
 ```
 
