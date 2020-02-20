@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.viewpager2.widget.ViewPager2;
@@ -18,8 +16,6 @@ import com.sairanadheer.nasapicturesapp.adapters.ImageDetailPagerAdapter;
 
 import org.json.JSONArray;
 
-import java.util.List;
-
 public class ImageDetailFragment extends DialogFragment {
 
     private FragmentImageDetailBinding mImageDetailBinding;
@@ -27,7 +23,7 @@ public class ImageDetailFragment extends DialogFragment {
     private JSONArray imagesData;
     private int imagePosition;
 
-    public ImageDetailFragment(JSONArray imagesData, int imagePosition) {
+    private ImageDetailFragment(JSONArray imagesData, int imagePosition) {
         this.imagesData = imagesData;
         this.imagePosition = imagePosition;
     }

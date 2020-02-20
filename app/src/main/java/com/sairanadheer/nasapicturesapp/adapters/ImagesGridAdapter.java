@@ -2,12 +2,10 @@ package com.sairanadheer.nasapicturesapp.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -27,10 +25,6 @@ import org.json.JSONException;
 
 public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.ImagesGridViewHolder> {
 
-    private final int VIEW_TYPE_IMAGE = 0;
-    private final int VIEW_TYPE_LOADING = 1;
-
-
     private Context mContext;
     private JSONArray imagesData;
 
@@ -42,15 +36,8 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
     @NonNull
     @Override
     public ImagesGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-        if (viewType == VIEW_TYPE_IMAGE) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_images_grid, parent, false);
-            return new ImagesGridViewHolder(view);
-        } else if (viewType == VIEW_TYPE_LOADING) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loader, parent, false);
-            return new LoadingViewHolder(view);
-        }
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_images_grid, parent, false);
+        return new ImagesGridViewHolder(view);
     }
 
     @Override
@@ -58,13 +45,10 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
 
         populateItemRows(holder, position);
 
-        holder.gridImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imagesData, position);
-                imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
-                imageDetailFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "ImagesGridFragment");
-            }
+        holder.gridImage.setOnClickListener(view -> {
+            ImageDetailFragment imageDetailFragment = ImageDetailFragment.newInstance(imagesData, position);
+            imageDetailFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_NoActionBar);
+            imageDetailFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "ImagesGridFragment");
         });
 
     }
@@ -97,15 +81,6 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         return imagesData == null ? 0 : imagesData.length();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        try {
-            return imagesData.getJSONObject(position).getString("url") == null ? VIEW_TYPE_LOADING : VIEW_TYPE_IMAGE;
-        } catch (Exception e) {
-            showAlertDialog();
-        }
-        return 0;
-    }
 
     class ImagesGridViewHolder extends RecyclerView.ViewHolder {
         private AppCompatImageView gridImage;
@@ -116,26 +91,11 @@ public class ImagesGridAdapter extends RecyclerView.Adapter<ImagesGridAdapter.Im
         }
     }
 
-    private class LoadingViewHolder extends ImagesGridViewHolder {
-
-        private ProgressBar progressBar;
-
-        public LoadingViewHolder(View itemView) {
-            super(itemView);
-            progressBar = itemView.findViewById(R.id.progressBar);
-        }
-    }
-
     private void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("ERROR");
         builder.setMessage("Something went wrong.Please try again later");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.setCancelable(false);
         builder.show();
     }

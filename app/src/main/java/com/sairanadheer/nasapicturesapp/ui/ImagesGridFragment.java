@@ -3,7 +3,6 @@ package com.sairanadheer.nasapicturesapp.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,12 +115,7 @@ public class ImagesGridFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("ERROR");
         builder.setMessage("Something went wrong.Please try again later");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.setCancelable(false);
         builder.show();
     }
